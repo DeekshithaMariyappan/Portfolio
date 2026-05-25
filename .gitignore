@@ -1,0 +1,2 @@
+# Ignore assets directory to prevent personal photos/media from being checked into version control
+assets/
