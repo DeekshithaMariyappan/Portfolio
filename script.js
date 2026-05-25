@@ -255,13 +255,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const wrapperRect = container.parentElement.getBoundingClientRect();
             const relativeX = (xPos / width) * wrapperRect.width;
             
-            // Offset tooltip to the left if near the right edge to prevent overflow
-            const tooltipOffset = relativeX > wrapperRect.width * 0.65 ? -200 : 20;
-
-            tooltip.style.left = `${relativeX + tooltipOffset}px`;
-            tooltip.style.top = `30px`;
-            tooltip.style.opacity = '1';
-            tooltip.style.transform = 'translateY(0)';
+            // If mobile view, center tooltip at the top of the chart wrapper
+            if (window.innerWidth < 600) {
+                tooltip.style.left = '50%';
+                tooltip.style.transform = 'translateX(-50%) translateY(0)';
+                tooltip.style.top = '10px';
+                tooltip.style.opacity = '1';
+            } else {
+                // Offset tooltip to the left if near the right edge to prevent overflow
+                const tooltipOffset = relativeX > wrapperRect.width * 0.65 ? -200 : 20;
+                tooltip.style.left = `${relativeX + tooltipOffset}px`;
+                tooltip.style.top = `30px`;
+                tooltip.style.transform = 'translateY(0)';
+                tooltip.style.opacity = '1';
+            }
         };
 
         const hideTooltip = () => {
